@@ -1,0 +1,35 @@
+﻿@using Urgentcargus.Models
+@model IEnumerable<EmployeeDepartmentViewModel>
+
+@{
+    ViewBag.Title = "Urgent Cargus";
+}
+
+<h2>Department Employees</h2>
+
+<table>
+    @using (Ajax.BeginForm(new AjaxOptions
+    {
+        HttpMethod = "get",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "employeeBody"
+    }))
+    {
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(modelItem => modelItem.FirstName)</th>
+                <th>@Html.DisplayNameFor(modelItem => modelItem.LastName)</th>
+                <th>@Html.DisplayNameFor(modelItem => modelItem.DepartmentName)</th>
+            </tr>
+            <tr>
+                <td><input type="search" name="fName" placeholder="first name" /></td>
+                <td><input type="search" name="lName" placeholder="last name" /></td>
+                <td><input type="search" name="dep" placeholder="department" /></td>
+            </tr>
+            <tr><td colspan="3" align="center" height="50px"><input type="submit" value="Search" /></td></tr>
+        </thead>
+    }
+    <tbody id="employeeBody">
+        @Html.Partial("_Employees", Model)
+    </tbody>
+</table>

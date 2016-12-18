@@ -1,0 +1,15 @@
+﻿@using System.Web.Optimization
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>@ViewBag.Title</title>
+        <link rel="stylesheet" type="text/css" href="~/Content/Style.css" />
+        @Scripts.Render("~/bundles/modernizr")
+        @RenderSection("head", required: false)
+    </head>
+    <body>
+        @RenderBody()
+        @Scripts.Render("~/bundles/jquery", "~/bundles/jqueryval")
+    </body>
+</html>
