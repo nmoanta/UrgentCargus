@@ -57,7 +57,7 @@ namespace Urgentcargus.Controllers
             }
             if (!String.IsNullOrEmpty(dep))
             {
-                employees = employees.Where(e => e.Department.Name.Contains(fn));
+                employees = employees.Where(e => e.Department.Name.Contains(dep));
             }
             return employees.ToList();
         }
