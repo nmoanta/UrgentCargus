@@ -61,3 +61,4 @@ C:\Users\nmoan\Documents\Visual Studio 2015\Projects\Urgentcargus\Urgentcargus\b
 C:\Users\nmoan\Documents\Visual Studio 2015\Projects\Urgentcargus\Urgentcargus\bin\System.Web.Optimization.xml
 C:\Users\nmoan\Documents\Visual Studio 2015\Projects\Urgentcargus\Urgentcargus\obj\Debug\Urgentcargus.Migrations.Initial.resources
 C:\Users\nmoan\Documents\Visual Studio 2015\Projects\Urgentcargus\Urgentcargus\obj\Debug\Urgentcargus.csproj.GenerateResource.Cache
+C:\Users\nmoan\Documents\Visual Studio 2015\Projects\Urgentcargus\Urgentcargus\obj\Debug\Urgentcargus.Migrations.AddEmployee.resources

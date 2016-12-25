@@ -7,29 +7,78 @@
 
 <h2>Department Employees</h2>
 
-<table>
-    @using (Ajax.BeginForm(new AjaxOptions
+<fieldset>
+    <legend>Add employee</legend>
+    @using (Html.BeginForm("Add", "Home", null, FormMethod.Post, new { @id = "addForm" }))
     {
-        HttpMethod = "get",
-        InsertionMode = InsertionMode.Replace,
-        UpdateTargetId = "employeeBody"
-    }))
-    {
-        <thead>
-            <tr>
-                <th>@Html.DisplayNameFor(modelItem => modelItem.FirstName)</th>
-                <th>@Html.DisplayNameFor(modelItem => modelItem.LastName)</th>
-                <th>@Html.DisplayNameFor(modelItem => modelItem.DepartmentName)</th>
-            </tr>
-            <tr>
-                <td><input type="search" name="fName" placeholder="first name" /></td>
-                <td><input type="search" name="lName" placeholder="last name" /></td>
-                <td><input type="search" name="dep" placeholder="department" /></td>
-            </tr>
-            <tr><td colspan="3" align="center" height="50px"><input type="submit" value="Search" /></td></tr>
-        </thead>
+        <div id="addDiv">
+            <div><label for="afName">First name</label> <input type="text" id="afName" name="FirstName" /></div>
+            <div><label for="lfName">Last name</label> <input type="text" id="alName" name="LastName" /></div>
+            <div><label for="aEmail">E-mail</label> <input type="email" id="aEmail" name="Email" /></div>
+            <div><label for="aPhone">Phone</label> <input type="text" id="aPhone" name="Phone" /></div>
+            <div><label for="aDOB">Birth date</label> <input type="text" id="aDOB" name="BirthDate" /></div>
+            <div><label for="DepartmentId">Department</label> @Html.DropDownList("DepartmentId", ViewBag.Departments as SelectList)</div>
+        </div>
+        <div id="buttonDiv">
+            <input type="submit" value="Add" />
+        </div>
     }
-    <tbody id="employeeBody">
-        @Html.Partial("_Employees", Model)
-    </tbody>
-</table>
+</fieldset>
+
+<fieldset>
+    <legend>Employees</legend>
+    <table>
+        @using (Ajax.BeginForm(new AjaxOptions
+        {
+            HttpMethod = "get",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "employeeBody"
+        }))
+        {
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(modelItem => modelItem.FirstName)</th>
+                    <th>@Html.DisplayNameFor(modelItem => modelItem.LastName)</th>
+                    <th>@Html.DisplayNameFor(modelItem => modelItem.DepartmentName)</th>
+                </tr>
+                <tr>
+                    <td><input type="search" name="fName" placeholder="first name" /></td>
+                    <td><input type="search" name="lName" placeholder="last name" /></td>
+                    <td><input type="search" name="dep" placeholder="department" /></td>
+                </tr>
+                <tr><td colspan="3" align="center" height="50px"><input type="submit" value="Search" /></td></tr>
+            </thead>
+        }
+        <tbody id="employeeBody">
+            @Html.Partial("_Employees", Model)
+        </tbody>
+    </table>
+</fieldset>
+
+@section Scripts {
+    <script type="text/javascript">
+        $().ready(function () {
+            $("#addForm").validate({
+                rules: {
+                    FirstName: "required",
+                    LastName: "required",
+                    Email: {
+                        required: true,
+                        email: true
+                    },
+                    Phone: {
+                        phoneUK: true
+                    },
+                    BirthDate: {
+                        dateITA: true
+                    },
+                    DepartmentId: {
+                        required: true
+                    }
+                }
+            });
+
+            $("#DepartmentId").prepend('<option value="" selected>--- Choose department ---</option>');
+        });
+    </script>
+}

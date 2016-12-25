@@ -10,9 +10,11 @@ namespace Urgentcargus.Controllers
     public class HomeController : Controller
     {
         private readonly IEmployeeDepartmentService m_EmployeeDepartmentService;
-        public HomeController(IEmployeeDepartmentService employeeDepartmentService)
+        private readonly IDepartmentService m_DepartmentService;
+        public HomeController(IEmployeeDepartmentService employeeDepartmentService, IDepartmentService departmentService)
         {
             m_EmployeeDepartmentService = employeeDepartmentService;
+            m_DepartmentService = departmentService;
         }
         // GET: Home
         public ActionResult Index(string fName = null, string lName = null, string dep = null)
@@ -26,13 +28,35 @@ namespace Urgentcargus.Controllers
                 return PartialView("_Employees", viewModelList);
             }
 
+            Mapper.CreateMap<Department, DepartmentViewModel>();
+            IList<Department> departments = m_DepartmentService.GetDepartments();
+            ViewBag.Departments = new SelectList(departments, "Id", "Name");
+
             return View(viewModelList);
         }
+
+        public ActionResult Add(AddEmployeeViewModel employee)
+        {
+            Mapper.CreateMap<AddEmployeeViewModel, Employee>();
+            Employee emp = Mapper.Map<AddEmployeeViewModel, Employee>(employee);
+
+            m_EmployeeDepartmentService.AddEmployee(emp);
+
+            return RedirectToAction("Index");
+        }
     }
+
     public interface IEmployeeDepartmentService
     {
         IList<Employee> GetEmployees();
         IList<Employee> GetEmployees(string fn, string ln, string dep);
+        void AddEmployee(Employee emp);
+    }
+
+    public interface IDepartmentService
+    {
+        IList<Department> GetDepartments();
+
     }
     public class EmployeeDepartmentService : IEmployeeDepartmentService
     {
@@ -60,6 +84,21 @@ namespace Urgentcargus.Controllers
                 employees = employees.Where(e => e.Department.Name.Contains(dep));
             }
             return employees.ToList();
+        }
+
+        public void AddEmployee(Employee emp)
+        {
+            db.Employees.Add(emp);
+            db.SaveChanges();
+        }
+    }
+
+    public class DepartmentService : IDepartmentService
+    {
+        private static UrgentCargusContext db = new UrgentCargusContext();
+        public IList<Department> GetDepartments()
+        {
+            return db.Departments.ToList();
         }
     }
 }

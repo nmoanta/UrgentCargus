@@ -145,12 +145,17 @@
     <Content Include="Content\Style.css" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\additional-methods.js" />
+    <Content Include="Scripts\additional-methods.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -158,6 +163,16 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
+    <Compile Include="Migrations\201612182210405_Initial.cs" />
+    <Compile Include="Migrations\201612182210405_Initial.Designer.cs">
+      <DependentUpon>201612182210405_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612250520406_AddEmployee.cs" />
+    <Compile Include="Migrations\201612250520406_AddEmployee.Designer.cs">
+      <DependentUpon>201612250520406_AddEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AddEmployeeViewModel.cs" />
+    <Compile Include="Models\DepartmentViewModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DependencyResolution\ControllerConvention.cs" />
     <Compile Include="DependencyResolution\DefaultRegistry.cs" />
@@ -166,10 +181,6 @@
     <Compile Include="DependencyResolution\StructureMapScopeModule.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612182210405_Initial.cs" />
-    <Compile Include="Migrations\201612182210405_Initial.Designer.cs">
-      <DependentUpon>201612182210405_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Department.cs" />
@@ -195,11 +206,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="Views\Add\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201612182210405_Initial.resx">
       <DependentUpon>201612182210405_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612250520406_AddEmployee.resx">
+      <DependentUpon>201612250520406_AddEmployee.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

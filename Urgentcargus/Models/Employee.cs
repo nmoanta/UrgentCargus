@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Urgentcargus.Models
 {
@@ -11,5 +12,7 @@ namespace Urgentcargus.Models
         public string PhoneNumber { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public virtual Department Department { get; set; }
+        [ForeignKey("Department")]
+        public int DepartmentId { get; set; }
     }
 }

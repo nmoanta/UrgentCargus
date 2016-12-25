@@ -3,7 +3,7 @@
 
 table {
     border-collapse: collapse;
-    width:100%;
+    width: 100%;
 }
 
     table tbody, table tbody th, table tbody td {
@@ -24,3 +24,14 @@ input[type="search"] {
     input[type="search"]:focus {
         outline: none;
     }
+
+#addDiv > div {
+    float: left;
+    padding-left: 10px;
+}
+
+label.error {
+    color: #a94442;
+    display: block;
+    text-align: right;
+}
