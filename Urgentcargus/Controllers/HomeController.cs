@@ -37,7 +37,9 @@ namespace Urgentcargus.Controllers
 
         public ActionResult Add(AddEmployeeViewModel employee)
         {
-            Mapper.CreateMap<AddEmployeeViewModel, Employee>();
+            Mapper.CreateMap<AddEmployeeViewModel, Employee>()
+                .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.Phone))
+                .ForMember(dest => dest.DateOfBirth, opt => opt.MapFrom(src => src.BirthDate));
             Employee emp = Mapper.Map<AddEmployeeViewModel, Employee>(employee);
 
             m_EmployeeDepartmentService.AddEmployee(emp);
@@ -56,7 +58,6 @@ namespace Urgentcargus.Controllers
     public interface IDepartmentService
     {
         IList<Department> GetDepartments();
-
     }
     public class EmployeeDepartmentService : IEmployeeDepartmentService
     {

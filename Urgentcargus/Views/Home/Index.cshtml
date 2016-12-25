@@ -9,7 +9,13 @@
 
 <fieldset>
     <legend>Add employee</legend>
-    @using (Html.BeginForm("Add", "Home", null, FormMethod.Post, new { @id = "addForm" }))
+    @using (Ajax.BeginForm("Add", "Home", null, new AjaxOptions
+    {
+        HttpMethod = "get",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "employeeBody",
+        OnSuccess = "clearAddForm"
+    }, new { @id = "addForm" }))
     {
         <div id="addDiv">
             <div><label for="afName">First name</label> <input type="text" id="afName" name="FirstName" /></div>
@@ -80,5 +86,10 @@
 
             $("#DepartmentId").prepend('<option value="" selected>--- Choose department ---</option>');
         });
+
+        function clearAddForm(e)
+        {
+            $("#addForm")[0].reset();
+        }
     </script>
 }
